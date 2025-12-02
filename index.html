@@ -154,6 +154,11 @@
             transition: width 0.3s ease;
         }
 
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text);
+        }
+
         .nav-link:hover::after,
         .nav-link.active::after {
             width: 100%;
@@ -820,9 +825,11 @@
                 grid-template-columns: 1fr;
             }
 
+            /* --- CORRECTION POUR MASQUER LES CARTES FLOTTANTES SUR MOBILE --- */
             .floating-card {
-                display: none;
+                display: none; 
             }
+            /* ----------------------------------------------------------------- */
 
             .contact-wrapper {
                 padding: 40px 30px;
