@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supply - Accueil</title>
     <style>
+        /* --- STYLES GÉNÉRAUX ET DE BASE (inchangés) --- */
         * {
             margin: 0;
             padding: 0;
@@ -86,14 +87,14 @@
             z-index: 0;
         }
         
-        /* --- NOUVEAUX STYLES DE NOËL --- */
+        /* --- STYLES MODE NOËL (SIMPLIFIÉS : SEULEMENT LA NEIGE) --- */
         #christmasToggle {
             position: fixed;
             top: 20px;
             right: 40px;
-            z-index: 10002; /* Au-dessus de la navbar */
+            z-index: 10002;
             padding: 10px 15px;
-            background: #c0392b; /* Rouge de Noël */
+            background: #c0392b; 
             color: white;
             border: none;
             border-radius: 8px;
@@ -144,13 +145,13 @@
             }
         }
         
-        /* Décoration du logo en mode Noël */
+        /* Décoration du logo en mode Noël (Chapeau) - OPTIONNEL, conservé si vous voulez un petit élément */
         .christmas-mode .nav-logo {
             position: relative;
         }
 
         .christmas-mode .nav-logo::before {
-            content: '🎅'; /* Chapeau de Père Noël */
+            content: '🎅'; 
             position: absolute;
             top: -10px;
             right: -10px;
@@ -159,10 +160,13 @@
             transform: rotate(15deg);
             z-index: 1001;
         }
-        /* --- FIN NOUVEAUX STYLES DE NOËL --- */
+        
+        /* LE CODE POUR LE SAPIN ET LES CADEAUX A ÉTÉ SUPPRIMÉ ICI. */
+
+        /* --- FIN STYLES MODE NOËL --- */
 
 
-        /* Navbar moderne */
+        /* Navbar moderne (inchangée) */
         .navbar {
             position: fixed;
             top: 0;
@@ -200,7 +204,7 @@
             background-clip: text;
             cursor: pointer;
         }
-
+        
         .nav-menu {
             display: flex;
             gap: 40px;
@@ -442,8 +446,8 @@
         /* Styles pour les autres sections (Services, Stats, etc.) */
         .main-content {
             flex-grow: 1;
-            padding-top: 100px; /* Espace pour la navbar fixe */
-            padding-bottom: 80px; /* Espace avant le footer */
+            padding-top: 100px; 
+            padding-bottom: 80px; 
         }
 
         /* Styles de la section */
@@ -675,66 +679,6 @@
             font-size: 16px;
         }
         
-        /* Contact Form */
-        .contact-section {
-            padding: 120px 0;
-        }
-
-        .contact-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px;
-            background: rgba(26, 26, 36, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 30px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(10, 10, 15, 0.8);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text);
-            font-size: 16px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
         /* Footer */
         .footer {
             padding: 80px 0 40px;
@@ -892,18 +836,11 @@
                 grid-template-columns: 1fr;
             }
 
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
             /* Masque les cartes flottantes sur mobile */
             .floating-card {
                 display: none; 
             }
 
-            .contact-wrapper {
-                padding: 40px 30px;
-            }
             
             .testimonial-card {
                 min-width: 85vw; /* Ajustement pour mobile */
@@ -990,7 +927,7 @@
                 <p>Assistance technique rapide et efficace</p>
             </div>
         </section>
-
+        
         <section class="stats-section content-section">
             <div class="container">
                 <div class="stats-grid">
@@ -1236,14 +1173,14 @@
     </footer>
 
     <script>
-        // Loader
+        // Loader (inchangé)
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hide');
             }, 1500);
         });
 
-        // Custom Cursor
+        // Custom Cursor (inchangé)
         const cursor = document.getElementById('cursor');
         const cursorFollower = document.getElementById('cursorFollower');
 
@@ -1257,7 +1194,7 @@
             }, 100);
         });
 
-        document.querySelectorAll('a, button, .nav-link, .nav-logo, #christmasToggle').forEach(el => {
+        document.querySelectorAll('a, button, .nav-link, .nav-logo, .nav-cta, #christmasToggle').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.transform = 'scale(1.5)';
                 cursorFollower.style.transform = 'scale(1.5)';
@@ -1268,7 +1205,7 @@
             });
         });
 
-        // Background Canvas Animation (Inchangé)
+        // Background Canvas Animation (inchangé)
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -1307,7 +1244,7 @@
             particles.push(new Particle());
         }
 
-        function animate() {
+        function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             particles.forEach((particle, index) => {
@@ -1330,17 +1267,17 @@
                 });
             });
 
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateCanvas);
         }
 
-        animate();
+        animateCanvas();
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
 
-        // Scroll Progress (Inchangé)
+        // Scroll Progress & Navbar scroll effect & Counter Animation (inchangés)
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1348,7 +1285,6 @@
             document.getElementById('scrollProgress').style.width = scrolled + '%';
         });
 
-        // Navbar scroll effect
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
@@ -1363,7 +1299,6 @@
             lastScroll = currentScroll;
         });
 
-        // Counter Animation for Stats (Inchangé)
         function animateCounter(element) {
             const target = parseInt(element.getAttribute('data-target'));
             const statLabel = element.parentElement.querySelector('.stat-label').textContent;
@@ -1384,7 +1319,6 @@
             }, 16);
         }
 
-        // Trigger counter animation when stats section is visible
         const statsSection = document.querySelector('.stats-section');
         if (statsSection) {
             const statsObserver = new IntersectionObserver((entries) => {
@@ -1398,7 +1332,7 @@
             statsObserver.observe(statsSection);
         }
 
-        // Parallax effect for floating cards (Inchangé)
+        // Parallax effect for floating cards (inchangé)
         window.addEventListener('mousemove', (e) => {
             const moveX = (e.clientX - window.innerWidth / 2) / 50;
             const moveY = (e.clientY - window.innerHeight / 2) / 50;
@@ -1410,30 +1344,27 @@
         });
 
 
-        // --- LOGIQUE MODE NOËL ---
+        // --- LOGIQUE MODE NOËL (SIMPLIFIÉE) ---
         const SNOW_COUNT = 50;
-
+        
         function createSnowfall() {
             const snowContainer = document.getElementById('snow-container');
             if (!snowContainer) return;
 
-            // Vider l'ancien contenu si elle est appelée à nouveau
             snowContainer.innerHTML = ''; 
 
             for (let i = 0; i < SNOW_COUNT; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.classList.add('snowflake');
-                snowflake.textContent = '❅'; // Caractère de flocon de neige
-
-                // Paramètres aléatoires
-                const size = (Math.random() * 0.8) + 0.5; // 0.5 à 1.3em
-                const speed = (Math.random() * 20) + 10; // Durée de 10s à 30s
-                const delay = Math.random() * 10; // Délai de 0s à 10s
+                snowflake.textContent = '❅'; 
+                const size = (Math.random() * 0.8) + 0.5;
+                const speed = (Math.random() * 20) + 10;
+                const delay = Math.random() * 10;
 
                 snowflake.style.left = `${Math.random() * 100}vw`;
                 snowflake.style.fontSize = `${size}em`;
                 snowflake.style.animationDuration = `${speed}s`;
-                snowflake.style.animationDelay = `-${delay}s`; // Commencer en milieu d'animation
+                snowflake.style.animationDelay = `-${delay}s`; 
 
                 snowContainer.appendChild(snowflake);
             }
@@ -1442,15 +1373,15 @@
         function removeSnowfall() {
             const snowContainer = document.getElementById('snow-container');
             if (snowContainer) {
-                snowContainer.innerHTML = ''; // Supprimer tous les flocons
+                snowContainer.innerHTML = '';
             }
         }
 
         function toggleChristmasMode() {
             const body = document.body;
-            const isChristmasMode = body.classList.toggle('christmas-mode');
+            // Utilisez toggle pour basculer la classe
+            const isChristmasMode = body.classList.toggle('christmas-mode'); 
             
-            // 1. Persister l'état (important pour toutes les pages)
             if (isChristmasMode) {
                 localStorage.setItem('christmasMode', 'enabled');
                 createSnowfall();
@@ -1461,17 +1392,18 @@
         }
 
         function applyChristmasModeOnLoad() {
+            // Vérifie l'état au chargement de la page
             if (localStorage.getItem('christmasMode') === 'enabled') {
                 document.body.classList.add('christmas-mode');
-                // Générer la neige au chargement si le mode est actif
                 createSnowfall(); 
             }
         }
 
-        // 2. Événement et application au chargement
-        document.getElementById('christmasToggle').addEventListener('click', toggleChristmasMode);
-        // Appliquer le mode Noël immédiatement si l'utilisateur l'avait activé
-        applyChristmasModeOnLoad(); 
+        // Événement après le chargement complet du DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('christmasToggle').addEventListener('click', toggleChristmasMode);
+            applyChristmasModeOnLoad(); 
+        });
 
     </script>
 </body>
