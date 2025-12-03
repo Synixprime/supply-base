@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supply - Contact</title>
     <style>
-        /* --- Styles Généraux (Copiés de index.html) --- */
+        /* --- STYLES GLOBALES (Consistantes avec index.html) --- */
         * {
             margin: 0;
             padding: 0;
@@ -21,137 +21,20 @@
             --text-dim: #9CA3AF;
             --border: rgba(255, 255, 255, 0.1);
         }
-
-        .icon-svg {
-            width: 48px;
-            height: 48px;
-            fill: var(--accent);
-            transition: all 0.3s ease;
-        }
-
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--primary);
             color: var(--text);
-            overflow-x: hidden;
-            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        /* Curseur personnalisé */
-        * {
-            cursor: none;
-        }
-
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            transition: transform 0.2s ease, opacity 0.3s;
-            mix-blend-mode: difference;
-        }
-
-        .cursor-follower {
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10001;
-            transition: transform 0.15s ease;
-        }
-
-        /* Background animé */
-        .bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            align-items: center;
+            padding-top: 100px; /* Espace pour la navbar fixe */
+            overflow-x: hidden;
         }
         
-        /* --- Styles Mode Noël (Pour la persistance) --- */
-        #christmasToggle {
-            position: fixed;
-            top: 20px;
-            right: 40px;
-            z-index: 10002;
-            padding: 10px 15px;
-            background: #c0392b;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            font-family: inherit;
-        }
-
-        #christmasToggle:hover {
-            background: #e74c3c;
-            transform: translateY(-2px);
-        }
-        
-        #snow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        .snowflake {
-            color: #fff;
-            font-size: 1em;
-            font-family: Arial, sans-serif;
-            text-shadow: 0 0 1px #000;
-            position: absolute;
-            top: -10px;
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% {
-                opacity: 0.8;
-                transform: translateY(0);
-            }
-            100% {
-                opacity: 0.8;
-                transform: translateY(100vh);
-            }
-        }
-        
-        .christmas-mode .nav-logo {
-            position: relative;
-        }
-
-        .christmas-mode .nav-logo::before {
-            content: '🎅'; 
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 18px;
-            line-height: 1;
-            transform: rotate(15deg);
-            z-index: 1001;
-        }
-        /* --- Fin Styles Mode Noël --- */
-
-        /* Navbar moderne */
+        /* Navbar de base (copiée de index.html) */
         .navbar {
             position: fixed;
             top: 0;
@@ -163,11 +46,6 @@
             background: rgba(10, 10, 15, 0.8);
             border-bottom: 1px solid var(--border);
             transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            padding: 10px 0;
-            background: rgba(10, 10, 15, 0.95);
         }
 
         .nav-container {
@@ -188,8 +66,9 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             cursor: pointer;
+            text-decoration: none;
         }
-
+        
         .nav-menu {
             display: flex;
             gap: 40px;
@@ -207,95 +86,101 @@
             cursor: pointer;
             text-transform: uppercase;
         }
-        
-        /* Styles de section (Pour le formulaire) */
-        .main-content {
-            flex-grow: 1;
-            padding-top: 100px; 
-            padding-bottom: 80px; 
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        .content-section {
-            padding: 120px 0;
-            position: relative;
-            z-index: 1;
-            min-height: calc(100vh - 180px); /* Pour que le footer soit en bas */
-            display: flex;
-            align-items: center;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
+        .nav-link:hover::after,
+        .nav-link.active::after {
             width: 100%;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
+        .nav-cta {
+            padding: 12px 30px;
+            background: var(--accent);
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        .section-title {
-            font-size: clamp(36px, 5vw, 64px);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
         }
-        
-        /* Contact Form Styles */
-        .contact-wrapper {
+
+
+        /* --- STYLES DE LA PAGE CONTACT --- */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px 0 80px; 
+            width: 100%;
+        }
+
+        .contact-section {
             max-width: 800px;
+            width: 100%;
             margin: 0 auto;
-            padding: 60px;
-            background: rgba(26, 26, 36, 0.6);
-            backdrop-filter: blur(20px);
+            padding: 0 20px;
+        }
+
+        .contact-form-card {
+            background: var(--secondary);
             border: 1px solid var(--border);
             border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-form-card h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .contact-form-card p {
+            color: var(--text-dim);
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .form-group {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text);
+            color: var(--text-dim);
         }
 
         .form-group input,
-        .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 16px 20px;
-            background: rgba(10, 10, 15, 0.8);
+            padding: 15px;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
+            background: var(--primary);
             color: var(--text);
             font-size: 16px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            /* Style spécifique au select pour qu'il ressemble aux inputs */
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 1.5em;
+            transition: border-color 0.3s ease;
         }
-        
+
         .form-group input:focus,
-        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
 
         .form-group textarea {
@@ -303,72 +188,103 @@
             min-height: 150px;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .btn-primary {
-            padding: 18px 40px;
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
             background: var(--accent);
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             color: white;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 14px;
+        .btn-submit:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
+        /* --- STYLES MODAL DE SUCCÈS --- */
+        .modal-overlay {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-            .container {
-                padding: 0 20px;
-            }
+        .modal-content {
+            background-color: var(--secondary);
+            border: 1px solid var(--accent);
+            border-radius: 16px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 60px rgba(99, 102, 241, 0.4);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.show .modal-content {
+             transform: scale(1);
+        }
 
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
+        .modal-icon {
+            font-size: 60px;
+            color: #2ecc71; /* Vert pour succès */
+            margin-bottom: 20px;
+            display: block;
+        }
 
-            .contact-wrapper {
-                padding: 40px 30px;
-            }
+        .modal-content h3 {
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .modal-content p {
+            color: var(--text-dim);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .modal-close-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .modal-close-btn:hover {
+            background: var(--accent-light);
         }
     </style>
 </head>
 <body>
-    <div class="scroll-progress" id="scrollProgress"></div>
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-follower" id="cursorFollower"></div>
-    <canvas class="bg-canvas" id="bgCanvas"></canvas>
-    
-    <button id="christmasToggle" title="Activer/Désactiver le Mode Noël">Mode Noël 🎄</button>
-    <div id="snow-container"></div>
-    
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">SUPPLY</a>
@@ -384,273 +300,115 @@
     </nav>
 
     <main class="main-content">
-        <section class="content-section" id="contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Parlez-nous de votre projet</h2>
-                    <p class="section-subtitle">
-                        Remplissez le formulaire ci-dessous et notre équipe vous contactera sur Discord dans les 24 heures pour discuter de vos besoins.
-                    </p>
-                </div>
+        <section class="contact-section">
+            <div class="contact-form-card">
+                <h2>Commander la Base</h2>
+                <p>Remplissez le formulaire ci-dessous pour initier votre achat. Un membre de notre équipe vous contactera sous peu pour finaliser le paiement.</p>
 
-                <div class="contact-wrapper">
-                    <form id="contactForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="name">Votre Nom Complet</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="discord_id">Votre ID Discord (Ex: User#1234 ou @user)</label>
-                                <input type="text" id="discord_id" name="discord_id" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Souhaité</label>
-                            <select id="service" name="service" required>
-                                <option value="" disabled selected>Sélectionnez un service</option>
-                                <option value="Achat Base Supply">Achat de la Base Supply</option>
-                                <option value="Développement Sur Mesure">Développement Sur Mesure</option>
-                                <option value="Support/Question Technique">Support/Question Technique</option>
-                                <option value="Partenariat">Partenariat</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Votre Message Détaillé</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%;">Envoyer la Demande</button>
-                    </form>
-                </div>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="discord">Nom d'utilisateur Discord (Ex: User#0000 ou @user)</label>
+                        <input type="text" id="discord" name="discord" required placeholder="Votre Discord">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse Email</label>
+                        <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre Message / Détails de la commande (Optionnel)</label>
+                        <textarea id="message" name="message" placeholder="J'aimerais acheter la version Premium..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Envoyer la Commande</button>
+                </form>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 Supply RP. Tous droits réservés. | Base GTA RP Professionnelle</p>
-            </div>
+    <div id="successModal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()"> 
+            <span class="modal-icon">✅</span>
+            <h3>Commande Envoyée</h3>
+            <p style="color: var(--text);">
+                **Merci de faire un ticket afin de finaliser votre paiement.**
+                <br><br>
+                Notre équipe vous a également contacté sur Discord.
+            </p>
+            <button class="modal-close-btn" onclick="closeModal()">Compris</button>
         </div>
-    </footer>
+    </div>
 
     <script>
-        // --- LOGIQUE MODE NOËL (Pour la persistance sur cette page) ---
-        const SNOW_COUNT = 50;
+        // !! ATTENTION: REMPLACEZ CETTE URL PAR VOTRE VRAI WEBHOOK DISCORD !!
+        const WEBHOOK_URL = 'VOTRE_URL_DE_WEBHOOK_DISCORD_ICI'; 
 
-        function createSnowfall() {
-            const snowContainer = document.getElementById('snow-container');
-            if (!snowContainer) return;
-            snowContainer.innerHTML = ''; 
+        const form = document.getElementById('contactForm');
+        const modal = document.getElementById('successModal');
 
-            for (let i = 0; i < SNOW_COUNT; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                snowflake.textContent = '❅';
-                const size = (Math.random() * 0.8) + 0.5;
-                const speed = (Math.random() * 20) + 10;
-                const delay = Math.random() * 10;
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.fontSize = `${size}em`;
-                snowflake.style.animationDuration = `${speed}s`;
-                snowflake.style.animationDelay = `-${delay}s`;
-                snowContainer.appendChild(snowflake);
-            }
+        function showModal() {
+            modal.classList.add('show');
         }
 
-        function removeSnowfall() {
-            const snowContainer = document.getElementById('snow-container');
-            if (snowContainer) {
-                snowContainer.innerHTML = ''; 
-            }
-        }
-
-        function toggleChristmasMode() {
-            const body = document.body;
-            const isChristmasMode = body.classList.toggle('christmas-mode');
-            
-            if (isChristmasMode) {
-                localStorage.setItem('christmasMode', 'enabled');
-                createSnowfall();
-            } else {
-                localStorage.setItem('christmasMode', 'disabled');
-                removeSnowfall();
-            }
-        }
-
-        function applyChristmasModeOnLoad() {
-            if (localStorage.getItem('christmasMode') === 'enabled') {
-                document.body.classList.add('christmas-mode');
-                createSnowfall(); 
-            }
+        function closeModal() {
+            modal.classList.remove('show');
         }
         
-        document.getElementById('christmasToggle').addEventListener('click', toggleChristmasMode);
-        applyChristmasModeOnLoad(); 
-        // --- FIN LOGIQUE MODE NOËL ---
-
-        // Custom Cursor & Background (Code inchangé)
-        const cursor = document.getElementById('cursor');
-        const cursorFollower = document.getElementById('cursorFollower');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
-        });
-
-        document.querySelectorAll('a, button, .nav-link, .nav-logo, #christmasToggle').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursorFollower.style.transform = 'scale(1.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursorFollower.style.transform = 'scale(1)';
-            });
-        });
-
-        // Background Canvas Animation (Code inchangé)
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particles = [];
-        const particleCount = 100;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach((particle, index) => {
-                particle.update();
-                particle.draw();
-
-                particles.slice(index + 1).forEach(otherParticle => {
-                    const dx = particle.x - otherParticle.x;
-                    const dy = particle.y - otherParticle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(particle.x, particle.y);
-                        ctx.lineTo(otherParticle.x, otherParticle.y);
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - distance / 150)})`;
-                        ctx.stroke();
-                    }
-                });
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Scroll Progress (Code inchangé)
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scrollProgress').style.width = scrolled + '%';
-        });
-
-        // --- LOGIQUE WEBHOOK DISCORD ---
-
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const form = e.target;
-            const formData = new FormData(form);
-            
-            // ⚠️ REMPLACEZ CETTE CHAÎNE PAR VOTRE PROPRE URL DE WEBHOOK DISCORD
-            const WEBHOOK_URL = 'VOTRE_WEBHOOK_DISCORD_ICI'; 
-            
-            if (WEBHOOK_URL === 'VOTRE_WEBHOOK_DISCORD_ICI') {
-                alert("🚨 ATTENTION: Veuillez remplacer 'VOTRE_WEBHOOK_DISCORD_ICI' dans le code JavaScript par l'URL de votre Webhook Discord pour que cela fonctionne.");
-                return;
-            }
-
-            const payload = {
-                username: "Supply RP Contact Form",
-                // Optionnel: Décommentez et remplacez pour un avatar personnalisé sur Discord
-                // avatar_url: "URL_DE_VOTRE_AVATAR", 
+        function buildDiscordPayload(data) {
+            return {
                 embeds: [{
-                    title: "📬 Nouvelle Demande de Contact | Supply RP",
-                    description: `**Service Demandé:** ${formData.get('service')}`,
-                    color: 6415510, // Bleu-Violet pour l'accent
+                    title: "Nouvelle Commande de Base RP",
+                    description: `Une nouvelle commande a été reçue via le site web.`,
+                    color: 65280, // Green
                     fields: [
-                        { name: "👤 Nom", value: formData.get('name'), inline: true },
-                        { name: "💬 ID Discord", value: formData.get('discord_id'), inline: true },
-                        { name: "📝 Message", value: `>>> ${formData.get('message')}`, inline: false }
+                        { name: "Discord", value: data.discord, inline: true },
+                        { name: "Email", value: data.email, inline: true },
+                        { name: "Message", value: data.message || "Aucun message fourni.", inline: false }
                     ],
                     footer: {
-                        text: "Envoyé depuis la page contact."
+                        text: "Formulaire de commande Supply RP"
                     },
                     timestamp: new Date().toISOString()
                 }]
             };
+        }
+
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Désactiver le bouton pendant l'envoi pour éviter les doubles clics
+            const submitBtn = e.submitter;
+            submitBtn.textContent = "Envoi en cours...";
+            submitBtn.disabled = true;
 
             try {
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(buildDiscordPayload(data))
                 });
 
-                // Discord renvoie 204 No Content pour une requête de webhook réussie
-                if (response.ok || response.status === 204) {
-                    alert('✅ Message envoyé ! Nous vous recontacterons sur Discord dès que possible.');
+                if (response.ok) {
+                    // 1. Afficher la modal de succès
+                    showModal();
+                    // 2. Réinitialiser le formulaire
                     form.reset();
                 } else {
-                    throw new Error(`Discord a répondu avec un statut ${response.status}.`);
+                    alert('Erreur lors de l\'envoi de la commande au webhook. Vérifiez l\'URL du Webhook.');
                 }
             } catch (error) {
-                console.error('Erreur lors de l\'envoi du message:', error);
-                alert(`❌ Une erreur est survenue lors de l'envoi. Vérifiez l'URL du Webhook et la console.`);
+                console.error('Erreur réseau ou webhook:', error);
+                alert('Erreur: Impossible de contacter le serveur. Veuillez vérifier l\'URL du webhook et votre connexion.');
+            } finally {
+                // Réactiver le bouton
+                submitBtn.textContent = "Envoyer la Commande";
+                submitBtn.disabled = false;
             }
         });
-
     </script>
 </body>
 </html>
